@@ -79,7 +79,8 @@ const Whetherfile = () => {
   return (
     
     <div className="flex justify-center items-center min-h-screen bg-emerald-700 w-full px-4 py-6 sm:px-0">
-      <div className="flex flex-col items-center w-full max-w-md gap-5 shadow-2xl shadow-indigo-800 bg-gradient-to-r from-[#2f4680] to-[#500ae4] p-5 sm:p-6 sm:pt rounded-2xl">
+      {/* <div className="flex flex-col items-center w-full max-w-md gap-5 shadow-2xl shadow-indigo-800 bg-gradient-to-r from-[#2f4680] to-[#500ae4] p-5 sm:p-6 sm:pt rounded-2xl"> */}
+      <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xlflex flex-col items-center gap-5 shadow-2xl shadow-indigo-800bg-gradient-to-r from-[#2f4680] to-[#500ae4] p-6 rounded-2xl">
 
         {/* Search Bar */}
         <div className="flex items-center justify-center gap-2 w-full">
@@ -158,4 +159,5 @@ const Whetherfile = () => {
 }
 
 export default Whetherfile
+
 
