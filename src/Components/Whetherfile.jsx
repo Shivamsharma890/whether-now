@@ -8,73 +8,77 @@ import sunny_logo from '../assets/images/clear.png'
 import drizzy_logo from '../assets/images/drizzle.png'
 import hum_logo from '../assets/images/humidity.png'
 import wind_logo from '../assets/images/wind.png'
-import { API_KEY } from '../apiKey'
 
-export const API = process.env.REACT_APP_WEATHER_API_KEY;
+
+const API_URL = "https://api.openweathermap.org/data/2.5/weather";
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+
 
 const Whetherfile = () => {
 
-const allIcons = {
-"01d": sunny_logo,
-"01n": sunny_logo,
-"02d": cloudy_logo,
-"02n": cloudy_logo,
-"03d": cloudy_logo,
-"03n": cloudy_logo,
-"04d": drizzy_logo,
-"04n": drizzy_logo,
-"09d": rainy_logo,
-"09n": rainy_logo,
-"10d": rainy_logo,
-"10n": rainy_logo,
-"13d": snow_logo,
-"13n": snow_logo,
-};
+  const allIcons = {
+    "01d": sunny_logo,
+    "01n": sunny_logo,
+    "02d": cloudy_logo,
+    "02n": cloudy_logo,
+    "03d": cloudy_logo,
+    "03n": cloudy_logo,
+    "04d": drizzy_logo,
+    "04n": drizzy_logo,
+    "09d": rainy_logo,
+    "09n": rainy_logo,
+    "10d": rainy_logo,
+    "10n": rainy_logo,
+    "13d": snow_logo,
+    "13n": snow_logo,
+  };
 
-  const [weatherData, setWeatherData]=useState(null);
-  const inputRef = useRef() ;
 
-  useEffect(()=>{
+  const [weatherData, setWeatherData] = useState(null);
+  const inputRef = useRef();
+
+  useEffect(() => {
     fetchData("");
-  },[]);
+  }, []);
 
-  const fetchData = async (city)=>{
-   if(city === ""){
+  const fetchData = async (city) => {
+    if (city === "") {
       alert("Enter City name!")
       return;
-   }
-   try{
-    const search = await axios.get(API, {
-      params:{q: city, 
-         appid: API_KEY,
-      units: "metric",
-      },
-    });
+    }
+    try {
+      const search = await axios.get(API_URL, {
+        params: {
+          q: city,
+          appid: API_KEY,
+          units: "metric",
+        },
+      });
 
-    const data = search.data ;
-    console.log("Search",data);
+      const data = search.data;
+      console.log("Search", data);
 
-    const icon=allIcons[data.weather?.[0]?.icon] || sunny_logo;
+      const icon = allIcons[data.weather?.[0]?.icon] || sunny_logo;
 
-    setWeatherData({
-      humidity: data.main?.humidity,
-      windSpeed: data.wind?.speed,
-      temperature: data.main?.temp,
-      location: data.name,
-      icon: icon,
-      mains: data.weather?.[0]?.main,
-    });
+      setWeatherData({
+        humidity: data.main?.humidity,
+        windSpeed: data.wind?.speed,
+        temperature: data.main?.temp,
+        location: data.name,
+        icon: icon,
+        mains: data.weather?.[0]?.main,
+      });
 
 
-   } catch(error){
-      console.log("error feaching data:",error);
+    } catch (error) {
+      console.log("error feaching data:", error);
       setWeatherData(false);
-   }
+    }
   };
 
   return (
     
-  <div className="flex justify-center items-center min-h-screen bg-emerald-700 w-full px-4 py-6 sm:px-0">
+    <div className="flex justify-center items-center min-h-screen bg-emerald-700 w-full px-4 py-6 sm:px-0">
       <div className="flex flex-col items-center w-full max-w-md gap-5 shadow-2xl shadow-indigo-800 bg-gradient-to-r from-[#2f4680] to-[#500ae4] p-5 sm:p-6 sm:pt rounded-2xl">
 
         {/* Search Bar */}
@@ -154,5 +158,4 @@ const allIcons = {
 }
 
 export default Whetherfile
-
 
